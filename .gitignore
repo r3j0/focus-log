@@ -1,0 +1,21 @@
+# Dependencies and package cache
+node_modules/
+.pnpm-store/
+
+# Build output and coverage
+.next/
+out/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Local environment variables; commit examples with placeholder values only
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Logs and OS files
+*.log
+.DS_Store
