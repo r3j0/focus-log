@@ -1,0 +1,16 @@
+{
+  "name": "focus-log",
+  "private": true,
+  "description": "Focus Log 공통 개발 환경과 프론트엔드·백엔드 모노레포",
+  "packageManager": "pnpm@11.18.0",
+  "engines": {
+    "node": ">=26.7.0 <27"
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "3.9.7"
+  }
+}
