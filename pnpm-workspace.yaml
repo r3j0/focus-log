@@ -4,3 +4,5 @@
 packages:
   - 'app'
   - 'backend'
+allowBuilds:
+  unrs-resolver: true
