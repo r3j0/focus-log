@@ -7,6 +7,10 @@
     "node": ">=26.7.0 <27"
   },
   "scripts": {
+    "dev": "pnpm --dir app dev",
+    "build": "pnpm --dir app build",
+    "lint": "pnpm --dir app lint",
+    "typecheck": "pnpm --dir app typecheck",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
