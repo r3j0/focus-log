@@ -49,13 +49,30 @@ pnpm format:check
 
 ```text
 focus-log/
-├── app/                         # 하나의 Next.js 프로젝트를 둘 위치
-│   └── src/
-│       └── features/
-│           ├── voyage/          # Visual / Voyage
-│           │   └── README.md
-│           └── focus/           # Desktop / Focus
-│               └── README.md
+├── app/                         # Electron + Next.js 프론트엔드 프로젝트
+│   ├── electron/                # 데스크톱 앱 실행 영역
+│   │   ├── main.ts
+│   │   ├── preload.ts
+│   │   └── tsconfig.json
+│   ├── src/
+│   │   ├── app/                 # Next.js 페이지와 레이아웃
+│   │   │   ├── globals.css
+│   │   │   ├── layout.tsx
+│   │   │   └── page.tsx
+│   │   ├── features/            # 역할별 기능 코드
+│   │   │   ├── voyage/          # Visual / Voyage
+│   │   │   │   └── README.md
+│   │   │   └── focus/           # Desktop / Focus
+│   │   │       └── README.md
+│   │   └── types/
+│   │       └── electron.d.ts
+│   ├── AGENTS.md
+│   ├── README.md
+│   ├── package.json
+│   ├── next.config.ts
+│   ├── next-env.d.ts
+│   ├── tsconfig.json
+│   └── eslint.config.mjs
 ├── backend/                     # 서버 하나의 프로젝트 루트
 │   ├── README.md
 │   └── src/
@@ -77,10 +94,11 @@ focus-log/
 각 역할 폴더에는 범위와 협의할 사항을 적은 README를 둡니다.
 Git은 이 파일을 통해 폴더를 기록하므로 `.gitkeep`은 필요하지 않습니다.
 
-`app/`은 프론트엔드 프로젝트 전체를 담는 폴더입니다.
-Next.js 앱을 초기화할 때 페이지와 URL을 정의하는 `app/src/app/`을 추가하고,
-기능 코드는 `app/src/features/`에서 관리합니다.
+`app/`은 Electron과 Next.js를 함께 사용하는 프론트엔드 프로젝트 전체를 담는 폴더입니다.
+`app/electron/`은 데스크톱 창과 운영체제 연결을 담당하고,
+페이지와 URL은 `app/src/app/`, 기능 코드는 `app/src/features/`에서 관리합니다.
 `features`는 팀에서 정한 이름으로 Next.js의 특별한 예약 폴더가 아닙니다.
+설치와 실행 방법은 [`app/README.md`](app/README.md)를 참고합니다.
 
 백엔드는 `backend/`에서 실행과 공통 설정을 관리하며,
 `account`와 `platform`은 **동일 서버 안의 기능 모듈**입니다.
