@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "build": "nest build",
-    "format": "pnpm --workspace-root exec prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "pnpm exec prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
