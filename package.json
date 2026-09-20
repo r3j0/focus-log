@@ -8,8 +8,12 @@
   },
   "scripts": {
     "dev": "pnpm --dir app dev",
+    "dev:backend": "pnpm --dir backend start:dev",
     "build": "pnpm --dir app build",
+    "build:backend": "pnpm --dir backend build",
     "lint": "pnpm --dir app lint",
+    "lint:backend": "pnpm --dir backend lint",
+    "test:backend": "pnpm --dir backend test && pnpm --dir backend test:e2e",
     "typecheck": "pnpm --dir app typecheck",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

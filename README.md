@@ -1,10 +1,10 @@
 # Focus Log
 
 네 명이 역할을 나누어 하나의 서비스를 개발하는 모노레포입니다.
-프론트엔드는 Next.js를 사용할 예정이며, 백엔드는 기술을 결정한 뒤 **서버 하나**로 구성합니다.
+프론트엔드는 Next.js와 Electron을 사용하며, 백엔드는 NestJS **서버 하나**로 구성합니다.
 
-현재는 역할별 디렉토리와 pnpm workspace, Prettier 등 공통 개발 환경을 준비하는 단계입니다.
-Next.js 앱, 백엔드 실행 코드, DB 연결, 배포 설정은 이후 단계에서 추가합니다.
+현재는 프론트엔드와 백엔드의 기본 실행 환경을 구성한 단계입니다.
+DB 연결과 배포 설정은 이후 단계에서 추가합니다.
 
 ## 개발 환경
 
@@ -75,12 +75,16 @@ focus-log/
 │   └── eslint.config.mjs
 ├── backend/                     # 서버 하나의 프로젝트 루트
 │   ├── README.md
-│   └── src/
-│       └── modules/
-│           ├── account/         # 계정 관련 기능
-│           │   └── README.md
-│           └── platform/        # 세션·접속 상태·탐색 기능
-│               └── README.md
+│   ├── package.json
+│   ├── nest-cli.json
+│   ├── src/
+│   │   ├── app.module.ts
+│   │   ├── main.ts
+│   │   └── modules/
+│   │       ├── account/         # 계정 관련 기능
+│   │       ├── health/          # 서버 상태 확인 API
+│   │       └── platform/        # 세션·접속 상태·탐색 기능
+│   └── test/
 ├── package.json
 ├── pnpm-workspace.yaml
 ├── pnpm-lock.yaml
@@ -100,9 +104,9 @@ Git은 이 파일을 통해 폴더를 기록하므로 `.gitkeep`은 필요하지
 `features`는 팀에서 정한 이름으로 Next.js의 특별한 예약 폴더가 아닙니다.
 설치와 실행 방법은 [`app/README.md`](app/README.md)를 참고합니다.
 
-백엔드는 `backend/`에서 실행과 공통 설정을 관리하며,
+백엔드는 `backend/`에서 NestJS 실행과 공통 설정을 관리하며,
 `account`와 `platform`은 **동일 서버 안의 기능 모듈**입니다.
-백엔드 언어와 프레임워크를 결정하면 `src/modules/`의 소스 경로는 해당 기술의 규칙에 맞출 수 있습니다.
+서버 실행 방법과 상태 확인 API는 [`backend/README.md`](backend/README.md)를 참고합니다.
 
 ## 역할 분담
 
@@ -120,12 +124,8 @@ Desktop / Focus의 별도 데스크톱 실행 환경이 필요한지는 앱 초�
 ## pnpm workspace
 
 `pnpm-workspace.yaml`은 `app/`, `backend/`를 프로젝트 루트로 지정합니다.
-현재 `package.json`은 레포 루트에만 있으므로 공통 개발 도구만 설치됩니다.
-역할별 폴더에는 별도의 `package.json`을 만들지 않습니다.
-
-프론트엔드 초기화 시 `app/package.json`이 생기면 하나의 workspace 프로젝트로 추가됩니다.
-백엔드가 Node.js 기반이면 `backend/package.json` 하나로 서버 전체의 의존성과 실행 명령을 관리합니다.
-다른 언어를 선택하면 workspace에서 `backend` 항목을 제거하고 해당 언어의 패키지 관리 도구를 사용합니다.
+`app/package.json`과 `backend/package.json`이 각각 하나의 workspace 프로젝트입니다.
+`backend/src/modules/` 아래의 역할별 폴더에는 별도의 `package.json`을 만들지 않습니다.
 
 ## 코드 포맷
 

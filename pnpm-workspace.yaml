@@ -1,6 +1,5 @@
 # 각 경로는 하나의 프로젝트 루트입니다. 내부의 역할별 폴더는 패키지로 나누지 않습니다.
-# 현재는 루트 package.json만 있으며, 앱 초기화 시 각 프로젝트가 추가됩니다.
-# 백엔드가 Node.js를 사용하지 않으면 backend 항목을 제거하고 해당 언어의 도구로 관리합니다.
+# app은 Next.js·Electron 프론트엔드이고, backend는 NestJS 서버입니다.
 packages:
   - 'app'
   - 'backend'
