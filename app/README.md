@@ -27,6 +27,7 @@ pnpm install --frozen-lockfile
 pnpm lint
 pnpm typecheck
 pnpm build
+pnpm --dir app test:dev
 ```
 
 | 명령             | 확인하는 내용                                                      |
@@ -35,7 +36,9 @@ pnpm build
 | `pnpm typecheck` | 프론트엔드와 Electron 코드의 TypeScript 타입 오류를 검사합니다.    |
 | `pnpm build`     | Next.js 화면과 Electron 코드를 실제로 빌드할 수 있는지 확인합니다. |
 
-세 명령은 소스 코드를 자동으로 수정하지 않습니다. `pnpm build`가 만드는 `.next/`와
+`pnpm --dir app test:dev`는 잘못된 포트와 포트 충돌 시의 개발 실행 동작을 검증합니다.
+
+검사 명령은 소스 코드를 자동으로 수정하지 않습니다. `pnpm build`가 만드는 `.next/`와
 `dist-electron/`은 자동 생성 결과이므로 Git에 Commit하지 않습니다. 현재 빌드는 코드의 컴파일
 가능 여부를 확인하며 Windows 설치 파일이나 macOS 앱 패키지를 만들지는 않습니다.
 
@@ -49,6 +52,25 @@ pnpm dev
 
 이 명령은 Next.js 개발 서버, Electron TypeScript 컴파일러, Electron 앱을 함께 실행합니다.
 실행을 종료하려면 터미널에서 `Ctrl+C`를 누릅니다.
+
+기본 포트는 `3000`이며, `PORT`를 지정하면 Next.js 서버, 서버 준비 확인, Electron 창이
+모두 같은 포트를 사용합니다. 선택한 포트가 이미 사용 중이면 다른 포트로 자동 이동하지 않고
+오류로 종료합니다. `PORT`는 실행 전에 터미널 환경 변수로 지정합니다.
+
+```sh
+# macOS / Linux
+PORT=3001 pnpm dev
+```
+
+```powershell
+# Windows PowerShell
+$env:PORT = '3001'
+pnpm dev
+```
+
+`pnpm --dir app dev:next`와 `pnpm --dir app dev:electron`을 따로 실행할 때도 두 터미널에
+같은 `PORT` 값을 설정합니다. 개발 명령은 `ELECTRON_RENDERER_URL`을 해당 로컬 서버 주소로
+설정하므로 이 값을 별도로 지정할 필요가 없습니다.
 
 ## 디렉토리
 
