@@ -4,16 +4,17 @@
   "version": "0.1.0",
   "main": "dist-electron/main.js",
   "scripts": {
-    "dev": "concurrently --kill-others-on-fail --names next,electron-ts,electron \"pnpm dev:next\" \"pnpm dev:electron:compile\" \"pnpm dev:electron\"",
-    "dev:next": "next dev",
+    "dev": "node scripts/dev.mjs",
+    "dev:next": "node scripts/dev.mjs next",
     "dev:electron:compile": "tsc -p electron/tsconfig.json --watch --preserveWatchOutput",
-    "dev:electron": "wait-on http-get://127.0.0.1:3000 dist-electron/main.js && electron .",
+    "dev:electron": "node scripts/dev.mjs electron",
     "build": "pnpm build:next && pnpm build:electron",
     "build:next": "next build",
     "build:electron": "tsc -p electron/tsconfig.json",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit && tsc -p electron/tsconfig.json --noEmit"
+    "typecheck": "tsc --noEmit && tsc -p electron/tsconfig.json --noEmit",
+    "test:dev": "node --test scripts/dev.test.mjs"
   },
   "dependencies": {
     "next": "^16.3.5",
